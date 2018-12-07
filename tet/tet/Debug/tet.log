@@ -1,2 +1,3 @@
 ﻿  tet.cpp
+c:\users\dan\source\repos\tet\tet\tet.cpp(106): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   tet.vcxproj -> C:\Users\Dan\source\repos\tet\Debug\tet.exe

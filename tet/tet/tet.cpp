@@ -103,8 +103,8 @@ int main()
 	DWORD dwBytesWritten = 0;
 
 	bool bgameOver = false;
-
-	int nCurrentPiece = 0;
+	srand(time(0));
+	int nCurrentPiece = rand() % 7;
 	int nCurrentRotation = 0;
 	int nCurrentX = nFieldWidth / 2;
 	int nCurrentY = 0;
@@ -118,6 +118,8 @@ int main()
 	int nPieceCount = 0;
 	int nScore = 0;
 	vector<int> vLines;
+	int nLevel = 1;
+	int nLineCount = 0;
 
 	while (!bgameOver)
 	{
@@ -152,8 +154,6 @@ int main()
 							pField[(nCurrentY + py) * nFieldWidth + (nCurrentX + px)] = nCurrentPiece + 1;
 
 				nPieceCount++;
-				if (nPieceCount % 10 == 0)
-					if (nSpeed >= 10) nSpeed--;
 
 				for (int py = 0; py < 4; py++)
 					if (nCurrentY + py < nFieldHeight - 1) 
@@ -171,8 +171,18 @@ int main()
 						}
 					}
 
-				nScore += 25;
-				if (!vLines.empty()) nScore += (1 << vLines.size()) * 100;
+				nScore += 25 * nLevel;
+				if (!vLines.empty())
+				{
+					nScore += (1 << vLines.size()) * nLevel * 100;
+					nLineCount += vLines.size();
+					if (nLineCount % 10 == 0)
+					{
+						nLevel++;
+						if (nSpeed >= 10) 
+							nSpeed--;
+					}
+				}
 
 				nCurrentPiece = rand() % 7;
 				nCurrentRotation = 0;
@@ -195,6 +205,7 @@ int main()
 					screen[(nCurrentY + py + 2) * nScreenWidth + (nCurrentX + px + 2)] = nCurrentPiece + 65;
 
 		swprintf_s(&screen[2 * nScreenWidth + nFieldWidth + 6], 16, L"SCORE: %8d", nScore);
+		swprintf_s(&screen[3 * nScreenWidth + nFieldWidth + 6], 16, L"LEVEL: %8d", nLevel);
 
 		if (!vLines.empty())
 		{
@@ -215,8 +226,10 @@ int main()
 	}
 
 	CloseHandle(hConsole);
+	cout << "==================================================" << endl;
 	cout << "Game Over! Thank you for playing! Your score was: " << nScore << endl;
-	system("pause");
+	cout << "==================================================" << endl;
+	cin.get();
 
 	return 0;
 }
