@@ -2,6 +2,8 @@
   tet.cpp
 c:\users\dan\github\consoletetris\tet\tet\tet.cpp(106): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Generating code
-  All 167 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  394 of 470 functions (83.8%) were compiled, the rest were copied from previous compilation.
+    303 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   tet.vcxproj -> C:\Users\Dan\GitHub\ConsoleTetris\tet\Release\tet.exe
